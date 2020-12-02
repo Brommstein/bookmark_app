@@ -1,0 +1,20 @@
+body{
+    text-align: center;
+}
+
+.border{
+    border: 1px solid black;
+}
+
+#flexbox{
+    display: flex;
+    flex-direction: row;
+}
+
+#itemOne{
+    flex: 1;
+}
+
+#itemTwo{
+    flex: 3;
+}
