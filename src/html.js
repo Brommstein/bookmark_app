@@ -1,5 +1,4 @@
 //Class that creates pure html content
-import store from './store.js'
 
 function createHTML(){
     return `<header>
@@ -30,12 +29,11 @@ function createAddBookmark() {
         <br><br>
         <label for="rating">Rating for this bookmark: </label>
         <select name="rating" id="rating">
-            <option value="noRating" selected>☆☆☆☆☆</option>
-            <option value="oneStar">★☆☆☆☆</option>
-            <option value="twoStar">★★☆☆☆</option>
-            <option value="threeStar">★★★☆☆</option>
-            <option value="fourStar">★★★★☆</option>
-            <option value="fiveStar">★★★★★</option>
+            <option value="1" selected>★☆☆☆☆</option>
+            <option value="2">★★☆☆☆</option>
+            <option value="3">★★★☆☆</option>
+            <option value="4">★★★★☆</option>
+            <option value="5">★★★★★</option>
         </select>
         <button id="submit" type="submit">Submit</button>
     </form>
@@ -46,7 +44,6 @@ function createAddBookmark() {
 
 function createFilter() {
     return `<h3>Saved bookmarks</h3>
-    <!--Filter list with dropdown-->
     <select name="filter">
         <option value="a-z">A-Z</option>
         <option value="z-a">Z-A</option>
@@ -56,36 +53,31 @@ function createFilter() {
     <br><br>`
 }
 
-function createCollapsedView() {
+function createCollapsedView(bookmarks) {
     return `<section class="border">
     <div id="flexbox">
-        <p id="itemOne">Sample Bookmark</p>
-        <p id="itemOne">★★★★☆</p>
+        <p id="itemOne">${bookmarks.bookmark.title}</p>
+        <p id="itemOne">${bookmarks.bookmark.rating}</p>
+        <button type="button">Expand</button>
     </div>
-</section>`
+</section>
+<br>`
 }
 
-function createFullView() {
+function createFullView(bookmarks) { 
     return `<section class="border">
     <div id="flexbox" class="border">
-        <p id="itemTwo">Sample Bookmark</p>
-        <!--Able to remove bookmarks-->
+        <p id="itemTwo">${bookmarks.bookmark.title}</p>
         <button id="itemOne" class="edit">Edit</button>
         <button id="itemOne" class="delete">Delete</button>
     </div>
     <div id="bookmarkInfo">
         <br>
         <div id="flexbox">
-            <button id="itemOne" class="link">Link</button>
-            <p id="itemOne">★★★★☆</p>
+            <button type="button" id="itemOne" class="link">Link</button>
+            <p id="itemOne">${bookmarks.bookmark.rating}</p>
         </div>
-        <p>Sample text for the bookmark... It was a scrape that he hardly noticed.
-            Sure, there was a bit of blood but it was minor compared to most of the
-            other cuts and bruises he acquired on his adventures. There was no
-            way he could know that the rock that produced the cut had alien
-            genetic material on it that was now racing through his bloodstream.
-            He felt perfectly normal and continued his adventure with no
-            knowledge of what was about to happen to him.</p>
+        <p>${bookmarks.bookmark.desc}</p>
     </div>
 </section>`
 }

@@ -1,4 +1,5 @@
 //Main class to hold store and server info
+import html from './html';
 import $ from 'jquery';
 
 const BASE_URL = 'https://thinkful-list-api.herokuapp.com/brommstein/bookmarks';
@@ -9,31 +10,54 @@ function getInput() {
         event.preventDefault();
 
         let title = $(event.currentTarget).find('#title').val();
-        console.log(title);
         let url = $(event.currentTarget).find('#url').val();
-        console.log(url);
         let desc = $(event.currentTarget).find('#desc').val();
-        console.log(desc);
-        //Need to fix rating
         let rating = $(event.currentTarget).find('#rating').val();
-        console.log(rating);
 
         store.push({
-            title: title,
-            url: url,
-            desc: desc,
-            rating: rating,
+            bookmark: {
+                key: '',
+                title: title,
+                url: url,
+                desc: desc,
+                rating: rating,
+            },
             expanded: false,
             edit: false
         })
 
-        console.log(store);
+        //Sends input to server
+        const pass = JSON.stringify({
+            title: title,
+            url: url,
+            desc: desc,
+            rating: rating
+        });
+
+        fetch(BASE_URL, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: pass
+        }).then((response) => response.json())
+            //.then((json) => {console.log(json);})
+            .catch(err => console.log(err));
+
+       renderStoreBookmarks(); //need to be changed
     });
 }
 
+function renderStoreBookmarks() {
+    $('.savedBookmarks').empty();
+    const condencedBookmars = store.map((bookmark) => {
+        return html.createCollapsedView(bookmark)
+    })
+    $('.savedBookmarks').html(condencedBookmars.join('')) ;
+}
 
 export default {
     store,
+    BASE_URL,
     getInput,
+    renderStoreBookmarks
 
 }

@@ -3,20 +3,38 @@
 'use strict';
 import html from './html'
 import store from './store'
+import './index.css'
 import $ from 'jquery';
 
 function render() {
-    console.log('Starting file');
     $('body').html(html.createHTML);
     $('.creation').html(html.createAddBookmark);
     $('.saved').html(html.createFilter);
-    $('.savedBookmarks').html(html.createCollapsedView);
+    $('.savedBookmarks').html(store.renderStoreBookmarks);
 }
 
 
 function main() {
-    render();
-    store.getInput();
+    //Pulls info from server and stores into STORE
+    fetch(store.BASE_URL, {
+        method: 'GET'
+    }).then((response) => response.json()).then((json) => {
+        for (let i = 0; i < json.length; i++) {
+            store.store.push({
+                bookmark: {
+                    key: json[i].id,
+                    title: json[i].title,
+                    url: json[i].url,
+                    desc: json[i].desc,
+                    rating: json[i].rating
+                },
+                expanded: false,
+                edit: false
+            })
+        };
+    }).then(() => render())
+    .then(() => store.getInput())
+    .catch(err => console.log(err));
 }
 
 $(main);
