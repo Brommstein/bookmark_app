@@ -19,4 +19,4 @@ function main() {
     store.getInput();
 }
 
-(main);
+$(main);

@@ -5,7 +5,7 @@ const BASE_URL = 'https://thinkful-list-api.herokuapp.com/brommstein/bookmarks';
 const store = [];
 
 function getInput() {
-    ('.creation').submit(function (event) {
+    $('.creation').submit(function (event) {
         event.preventDefault();
 
         let title = $(event.currentTarget).find('#title').val();
