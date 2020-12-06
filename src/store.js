@@ -50,7 +50,7 @@ function getInput() {
 function renderStoreBookmarks() {
     $('.savedBookmarks').empty();
     const condencedBookmarks = store.map((bookmark) => {
-        console.log('ran renderStoreBookmarks')
+        // issue running any logic in this function
         return html.createCollapsedView(bookmark);
     })
 
