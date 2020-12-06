@@ -22,19 +22,22 @@ function main() {
         for (let i = 0; i < json.length; i++) {
             store.store.push({
                 bookmark: {
-                    key: json[i].id,
+                    id: json[i].id,
                     title: json[i].title,
                     url: json[i].url,
                     desc: json[i].desc,
-                    rating: json[i].rating
+                    rating: json[i].rating,
+                    expanded: false,
+                    edit: false
                 },
-                expanded: false,
-                edit: false
             })
         };
     }).then(() => render())
-    .then(() => store.getInput())
-    .catch(err => console.log(err));
+        .then(() => {
+            store.getInput()
+            store.getExpandCollapse()
+        })
+        .catch(err => console.log(err));
 }
 
 $(main);

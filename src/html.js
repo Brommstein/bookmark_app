@@ -53,12 +53,11 @@ function createFilter() {
     <br><br>`
 }
 
-function createCollapsedView(bookmarks) {
+function createCollapsedView(bookmark) {
     return `<section class="border">
-    <div id="flexbox">
-        <p id="itemOne">${bookmarks.bookmark.title}</p>
-        <p id="itemOne">${bookmarks.bookmark.rating}</p>
-        <button type="button">Expand</button>
+    <div id="flexbox" class="collapsed" data-bookmark-id="${bookmark.bookmark.id}">
+        <p id="itemOne">${bookmark.bookmark.title}</p>
+        <p id="itemOne">${bookmark.bookmark.rating}</p>
     </div>
 </section>
 <br>`

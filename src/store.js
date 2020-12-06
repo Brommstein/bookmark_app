@@ -21,9 +21,9 @@ function getInput() {
                 url: url,
                 desc: desc,
                 rating: rating,
+                expanded: false,
+                edit: false
             },
-            expanded: false,
-            edit: false
         })
 
         //Sends input to server
@@ -42,22 +42,49 @@ function getInput() {
             //.then((json) => {console.log(json);})
             .catch(err => console.log(err));
 
-       renderStoreBookmarks(); //need to be changed
+        renderStoreBookmarks(); //need to be changed
     });
 }
 
+// renders full bookmark list
 function renderStoreBookmarks() {
     $('.savedBookmarks').empty();
-    const condencedBookmars = store.map((bookmark) => {
-        return html.createCollapsedView(bookmark)
+    const condencedBookmarks = store.map((bookmark) => {
+        console.log('ran renderStoreBookmarks')
+        return html.createCollapsedView(bookmark);
     })
-    $('.savedBookmarks').html(condencedBookmars.join('')) ;
+
+    $('.savedBookmarks').html(condencedBookmarks.join(''));
 }
+
+// Need to work on this section
+function renderBookmark(bookmark) {
+    if (bookmark.expanded === true) {
+        console.log('true')
+        html.createFullView(bookmark);
+    }
+    if (bookmark.expanded === false) {
+        console.log('false')
+        html.createCollapsedView(bookmark);
+    }
+}
+
+// grabs id from the bookmark clicked on
+function getExpandCollapse() {
+    $('.savedBookmarks').on('click', '.collapsed', function (event) {
+        const position = $(event.currentTarget).data('bookmark-id');
+        console.log(position);
+    })
+}
+
+
 
 export default {
     store,
     BASE_URL,
     getInput,
-    renderStoreBookmarks
+    getExpandCollapse,
+    renderStoreBookmarks,
+
 
 }
