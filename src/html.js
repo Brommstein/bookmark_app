@@ -1,6 +1,6 @@
 //Class that creates pure html content
 
-function createHTML(){
+function createHTML() {
     return `<header>
     <h1>My Bookmarks App</h1>
     </header><br>
@@ -44,11 +44,13 @@ function createAddBookmark() {
 
 function createFilter() {
     return `<h3>Saved bookmarks</h3>
-    <select name="filter">
-        <option value="a-z">A-Z</option>
-        <option value="z-a">Z-A</option>
-        <option value="h-l">Highest-Lowest</option>
-        <option value="l-h">Lowest-Highest</option>
+    <label for="filter">Minimum rating</label>
+    <select name="filter" id="filter">
+        <option value="1" selected>★☆☆☆☆</option>
+        <option value="2">★★☆☆☆</option>
+        <option value="3">★★★☆☆</option>
+        <option value="4">★★★★☆</option>
+        <option value="5">★★★★★</option>
     </select>
     <br><br>`
 }
@@ -61,24 +63,24 @@ function createCollapsedView(bookmark) {
     </div>
 </section>
 <br>`
-}
+} 
 
-function createFullView(bookmarks) { 
+function createFullView(bookmark) {
     return `<section class="border">
-    <div id="flexbox" class="border">
-        <p id="itemTwo">${bookmarks.bookmark.title}</p>
-        <button id="itemOne" class="edit">Edit</button>
-        <button id="itemOne" class="delete">Delete</button>
+    <div id="flexbox" class="expanded" data-bookmark-id="${bookmark.bookmark.id}">
+        <p id="itemOne">${bookmark.bookmark.title}</p>
+        <p id="itemOne">${bookmark.bookmark.rating}</p>
     </div>
     <div id="bookmarkInfo">
         <br>
         <div id="flexbox">
-            <button type="button" id="itemOne" class="link">Link</button>
-            <p id="itemOne">${bookmarks.bookmark.rating}</p>
+            <button type="button" id="itemOne"><a href="${bookmark.bookmark.url}" target="_blank">${bookmark.bookmark.title}</a></button>
+            <button type="button" id="itemOne" class="delete">Delete</button>
         </div>
-        <p>${bookmarks.bookmark.desc}</p>
+        <p>${bookmark.bookmark.desc}</p>
     </div>
-</section>`
+</section>
+<br>`
 }
 
 export default {

@@ -13,7 +13,6 @@ function render() {
     $('.savedBookmarks').html(store.renderStoreBookmarks);
 }
 
-
 function main() {
     //Pulls info from server and stores into STORE
     fetch(store.BASE_URL, {
@@ -35,9 +34,12 @@ function main() {
     }).then(() => render())
         .then(() => {
             store.getInput()
-            store.getExpandCollapse()
+            store.getExpand()
+            store.getCollapse()
+            store.deleteButton()
+            store.filterChanged()
         })
-        .catch(err => console.log(err));
+        .catch(err => console.log(err));   
 }
 
 $(main);
