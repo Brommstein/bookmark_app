@@ -1,9 +1,11 @@
 body{
     text-align: center;
+    background-color: #dee5e5ff;
 }
 
 .border{
     border: 1px solid black;
+    background-color: white;
 }
 
 #flexbox{
@@ -17,4 +19,21 @@ body{
 
 #itemTwo{
     flex: 3;
+}
+
+header {
+    background-color: #877b66ff;
+}
+
+main {
+    margin-left: 60px;
+    margin-right: 60px;
+}
+
+footer {
+    background-color:#352d39ff;
+}
+
+footer p {
+    color: white;
 }
