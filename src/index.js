@@ -3,6 +3,8 @@
 'use strict';
 import html from './html'
 import store from './store'
+import bookmarkMod from './bookmark';
+import renderB from './renderBookmarks';
 import './index.css'
 import $ from 'jquery';
 
@@ -10,7 +12,7 @@ function render() {
     $('body').html(html.createHTML);
     $('.creation').html(html.createAddBookmark);
     $('.saved').html(html.createFilter);
-    $('.savedBookmarks').html(store.renderStoreBookmarks);
+    $('.savedBookmarks').html(renderB.renderStoreBookmarks);
 }
 
 function main() {
@@ -34,8 +36,8 @@ function main() {
     }).then(() => render())
         .then(() => {
             store.getInput()
-            store.getExpand()
-            store.getCollapse()
+            bookmarkMod.getExpand()
+            bookmarkMod.getCollapse()
             store.deleteButton()
             store.filterChanged()
         })
