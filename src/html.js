@@ -5,9 +5,9 @@ function createHTML() {
     <h1>My Bookmarks App</h1>
     </header><br>
     <main>
-    <div class="creation"></div>
-    <div class="saved"></div>
-    <div class="savedBookmarks"></div>
+    <section class="creation"></section>
+    <section class="saved"></section>
+    <section><ul class="savedBookmarks"></ul></section>
     </main><br>
     <footer>
     <p>Created by Ryan Conley</p>
@@ -54,17 +54,17 @@ function createFilter() {
 }
 
 function createCollapsedView(bookmark) {
-    return `<section class="border">
+    return `<li><section class="border">
     <div id="flexbox" class="collapsed" data-bookmark-id="${bookmark.bookmark.id}">
         <p id="itemOne">${bookmark.bookmark.title}</p>
         <p id="itemOne">${bookmark.bookmark.rating}</p>
     </div>
-</section>
+</section></li>
 <br>`
 } 
 
 function createFullView(bookmark) {
-    return `<section class="border">
+    return `<li><section class="border">
     <div id="flexbox" class="expanded border" data-bookmark-id="${bookmark.bookmark.id}">
         <p id="itemOne">${bookmark.bookmark.title}</p>
         <p id="itemOne">${bookmark.bookmark.rating}</p>
@@ -78,7 +78,7 @@ function createFullView(bookmark) {
         </div>
         <p>${bookmark.bookmark.desc}</p>
     </div>
-</section>
+</section></li>
 <br>`
 }
 

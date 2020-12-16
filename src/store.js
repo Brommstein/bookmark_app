@@ -1,5 +1,5 @@
 //Main class to hold store and server info
-import html from './html';
+import render from './renderBookmarks';
 import $ from 'jquery';
 
 const BASE_URL = 'https://thinkful-list-api.herokuapp.com/brommstein/bookmarks';
@@ -38,7 +38,7 @@ function getInput() {
                     edit: false
                 }
             })
-            renderStoreBookmarks();
+            render.renderStoreBookmarks();
         })
             .catch(err => console.log(err));
     });
@@ -47,7 +47,6 @@ function getInput() {
 function deleteButton() {
     $('.savedBookmarks').on('click', '.delete', e => {
         const position = $(e.currentTarget).closest('.border').find('.expanded').data('bookmark-id');
-        console.log(position);
         fetch(`${BASE_URL}/${position}`, {
             method: 'DELETE'
         })
@@ -56,71 +55,22 @@ function deleteButton() {
                 store.splice(i, 1);
             }
         }
-        renderStoreBookmarks();
+        render.renderStoreBookmarks();
     })
 }
 
 function filterChanged(){
     $('document').ready(function(){
         $('#filter').change(function(){
-            renderStoreBookmarks();
+            render.renderStoreBookmarks();
         })
     })
 }
-
-// renders full bookmark list
-function renderStoreBookmarks() {
-    $('.savedBookmarks').empty();
-    const condencedBookmarks = store.map((bookmark) => {
-        return renderBookmark(bookmark);
-    })
-
-    $('.savedBookmarks').html(condencedBookmarks.join(''));
-}
-
-// Need to work on this section
-function renderBookmark(bookmark) {
-    if (bookmark.bookmark.rating >= $('#filter').val()) {
-        if (bookmark.bookmark.expanded === true) {
-            return html.createFullView(bookmark);
-        }
-        if (bookmark.bookmark.expanded === false) {
-            return html.createCollapsedView(bookmark);
-        }
-    }
-}
-
-// grabs id from the bookmark clicked on
-function getExpand() {
-    $('.savedBookmarks').on('click', '.collapsed', function (event) {
-        //finds id on click
-        const position = $(event.currentTarget).data('bookmark-id');
-        //changes expanded on click
-        let foundMark = store.find(store => store.bookmark.id === position);
-        foundMark.bookmark.expanded = !foundMark.bookmark.expanded;
-        renderStoreBookmarks();
-    })
-}
-
-function getCollapse() {
-    $('.savedBookmarks').on('click', '.expanded', function (event) {
-        //finds id on click
-        const position = $(event.currentTarget).data('bookmark-id');
-        //changes expanded on click
-        let foundMark = store.find(store => store.bookmark.id === position);
-        foundMark.bookmark.expanded = !foundMark.bookmark.expanded;
-        renderStoreBookmarks();
-    })
-}
-
 
 export default {
     store,
     BASE_URL,
     getInput,
-    getExpand,
-    getCollapse,
-    renderStoreBookmarks,
     deleteButton,
     filterChanged
 }
