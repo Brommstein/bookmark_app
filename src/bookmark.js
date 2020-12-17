@@ -4,7 +4,7 @@ import $ from 'jquery';
 
 // grabs id from the bookmark clicked on
 function getExpand() {
-    $('.savedBookmarks').on('click', '.collapsed', function (event) {
+    $('.savedBookmarks').on('click keypress', '.collapsed', function (event) {
         //finds id on click
         const position = $(event.currentTarget).data('bookmark-id');
         //changes expanded on click
@@ -15,7 +15,7 @@ function getExpand() {
 }
 
 function getCollapse() {
-    $('.savedBookmarks').on('click', '.expanded', function (event) {
+    $('.savedBookmarks').on('click keypress', '.expanded', function (event) {
         //finds id on click
         const position = $(event.currentTarget).data('bookmark-id');
         //changes expanded on click
