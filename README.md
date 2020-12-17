@@ -1,5 +1,7 @@
 Live preview of app... brommstein.github.io/bookmark_app/.
 
+Bookmark App for Thinkful, posting new bookmarks and pulling past bookmarks from server with api, then rendering to the page.
+
 User Stories As a user: Completed
 I can add bookmarks to my bookmark list. Completed
 
