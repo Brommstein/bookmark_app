@@ -26,20 +26,24 @@ function getInput() {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: pass
-        }).then((response) => response.json()).then(response => {
-            store.push({
-                bookmark: {
-                    id: response.id,
-                    title: response.title,
-                    url: response.url,
-                    desc: response.desc,
-                    rating: response.rating,
-                    expanded: false,
-                    edit: false
-                }
-            })
-            render.renderStoreBookmarks();
+        }).then((response) => {
+            if (!response.ok) { throw response }
+            return response.json()
         })
+            .then(response => {
+                store.push({
+                    bookmark: {
+                        id: response.id,
+                        title: response.title,
+                        url: response.url,
+                        desc: response.desc,
+                        rating: response.rating,
+                        expanded: false,
+                        edit: false
+                    }
+                })
+                render.renderStoreBookmarks();
+            })
             .catch(err => console.log(err));
     });
 }
@@ -49,19 +53,21 @@ function deleteButton() {
         const position = $(e.currentTarget).closest('.border').find('.expanded').data('bookmark-id');
         fetch(`${BASE_URL}/${position}`, {
             method: 'DELETE'
-        })
-        for (let i = 0; i < store.length; i++) {
-            if (store[i].bookmark.id === position) {
-                store.splice(i, 1);
+        }).then(response => {
+            if (!response.ok) { throw response }
+            for (let i = 0; i < store.length; i++) {
+                if (store[i].bookmark.id === position) {
+                    store.splice(i, 1);
+                }
             }
-        }
-        render.renderStoreBookmarks();
+            render.renderStoreBookmarks();
+        })
     })
 }
 
-function filterChanged(){
-    $('document').ready(function(){
-        $('#filter').change(function(){
+function filterChanged() {
+    $('document').ready(function () {
+        $('#filter').change(function () {
             render.renderStoreBookmarks();
         })
     })
