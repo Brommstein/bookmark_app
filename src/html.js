@@ -6,6 +6,7 @@ function createHTML() {
     </header><br>
     <main>
     <section class="creation"></section>
+    <section class="failedCreation"></section>
     <section class="saved"></section>
     <section><ul class="savedBookmarks"></ul></section>
     </main><br>
@@ -17,7 +18,7 @@ function createHTML() {
 function createAddBookmark() {
     return `<div class="border">
     <h2>Lets add a bookmark!</h2>
-    <form id="bookmark">
+    <form id="bookmark creationForm">
         <label for="title">Name of bookmark: </label>
         <input type="text" id="title" name="title" tabindex="1" required>
         <br><br>
@@ -35,7 +36,7 @@ function createAddBookmark() {
             <option value="4">★★★★☆</option>
             <option value="5">★★★★★</option>
         </select>
-        <button id="submit" type="submit" tabindex="5">Submit</button>
+        <button class="bookmarkSubmit" id="submit" type="submit" tabindex="5">Submit</button>
     </form><br>
 </div>`
 }
@@ -54,7 +55,7 @@ function createFilter() {
 }
 
 function createCollapsedView(bookmark, idx) {
-    return `<li><section class="border">
+    return `<li><section class="border collapsedView">
     <div id="flexbox" class="collapsed" data-bookmark-id="${bookmark.bookmark.id}" tabindex="${idx}">
         <p id="itemOne">${bookmark.bookmark.title}</p>
         <p id="itemOne">${bookmark.bookmark.rating}</p>
@@ -64,7 +65,7 @@ function createCollapsedView(bookmark, idx) {
 } 
 
 function createFullView(bookmark, idx) {
-    return `<li><section class="border">
+    return `<li><section class="border expandedView">
     <div id="flexbox" class="expanded border" data-bookmark-id="${bookmark.bookmark.id}" tabindex="${idx}">
         <p id="itemOne">${bookmark.bookmark.title}</p>
         <p id="itemOne">${bookmark.bookmark.rating}</p>
