@@ -27,7 +27,10 @@ function getInput() {
             headers: { 'Content-Type': 'application/json' },
             body: pass
         }).then((response) => {
-            if (!response.ok) { throw response }
+            console.log()
+            if (!response.ok) {
+                throw response
+            }
             return response.json()
         })
             .then(response => {
@@ -44,7 +47,13 @@ function getInput() {
                 })
                 render.renderStoreBookmarks();
             })
-            .catch(err => console.log(err));
+            .catch(err => {
+                console.log('Failed to submit')
+                $('.failedCreation').append(
+                    $(`<p class="border">Failed to add data from server!</p>`)
+                )
+                console.log(err)
+            });
     });
 }
 
@@ -54,14 +63,25 @@ function deleteButton() {
         fetch(`${BASE_URL}/${position}`, {
             method: 'DELETE'
         }).then(response => {
-            if (!response.ok) { throw response }
+            if (!response.ok) {
+                $('.failedCreation').append(
+                    $(`<p class="border">Failed to delete data from server!</p>`)
+                )
+                throw response
+            }
             for (let i = 0; i < store.length; i++) {
                 if (store[i].bookmark.id === position) {
                     store.splice(i, 1);
                 }
             }
             render.renderStoreBookmarks();
-        })
+        }).catch(err => {
+            console.log('Failed to submit')
+            $('.failedCreation').append(
+                $(`<p class="border">Failed to delete data from server!</p>`)
+            )
+            console.log(err)
+        });
     })
 }
 

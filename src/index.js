@@ -21,6 +21,7 @@ function main() {
         method: 'GET'
     }).then((response) => {
         if (response.status >= 200 && response.status <= 299) {
+            $('.failedCreation').empty();
             return response.json()
         } else {
             throw Error(response.statusText);
