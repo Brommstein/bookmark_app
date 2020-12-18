@@ -14,7 +14,7 @@ function render() {
     $('.saved').html(html.createFilter);
     $('.savedBookmarks').html(renderB.renderStoreBookmarks);
 }
-
+ 
 function main() {
     //Pulls info from server and stores into STORE
     fetch(store.BASE_URL, {
@@ -48,8 +48,8 @@ function main() {
             store.getInput()
             bookmarkMod.getExpand()
             bookmarkMod.getCollapse()
-            store.deleteButton()
-            store.filterChanged()
+            bookmarkMod.deleteButton()
+            bookmarkMod.filterChanged()
         })
         .catch(err => console.log(err));
 }

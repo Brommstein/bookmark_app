@@ -57,46 +57,8 @@ function getInput() {
     });
 }
 
-function deleteButton() {
-    $('.savedBookmarks').on('click', '.delete', e => {
-        const position = $(e.currentTarget).closest('.border').find('.expanded').data('bookmark-id');
-        fetch(`${BASE_URL}/${position}`, {
-            method: 'DELETE'
-        }).then(response => {
-            if (!response.ok) {
-                $('.failedCreation').append(
-                    $(`<p class="border">Failed to delete data from server!</p>`)
-                )
-                throw response
-            }
-            for (let i = 0; i < store.length; i++) {
-                if (store[i].bookmark.id === position) {
-                    store.splice(i, 1);
-                }
-            }
-            render.renderStoreBookmarks();
-        }).catch(err => {
-            console.log('Failed to submit')
-            $('.failedCreation').append(
-                $(`<p class="border">Failed to delete data from server!</p>`)
-            )
-            console.log(err)
-        });
-    })
-}
-
-function filterChanged() {
-    $('document').ready(function () {
-        $('#filter').change(function () {
-            render.renderStoreBookmarks();
-        })
-    })
-}
-
 export default {
     store,
     BASE_URL,
-    getInput,
-    deleteButton,
-    filterChanged
+    getInput
 }
